@@ -16,19 +16,9 @@
   <div class="filterTag">
     <p class="title">Filter by tag</p>
 
-    <div class="checkBox">
-      <input type="checkbox" id="tag1" />
-      <label for="tag1">Tag</label>
-    </div>
-
-    <div class="checkBox">
-      <input type="checkbox" id="tag2" />
-      <label for="tag2">Tag</label>
-    </div>
-
-    <div class="checkBox">
-      <input type="checkbox" id="tag3" />
-      <label for="tag3">Tag</label>
+    <div class="checkBox" *ngFor="let tag of allGenres">
+      <input #checkBox (input)="onCheckBox(checkBox.value)" value="{{tag}}" type="checkbox"/>
+      <label for="tag1">{{tag}}</label>
     </div>
   </div>
 </div>

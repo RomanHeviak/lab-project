@@ -13,7 +13,7 @@ export class CardsComponent implements OnInit , OnChanges {
   constructor(private router: Router) {}
   @Input() games:IGames[] = []
   @Output() scrollToTop = new EventEmitter<string>();
-  pageSlice:IGames[] = this.games
+  pageSlice:IGames[] =[]
   endIndex:number = 9
 
   pageSize = 9;

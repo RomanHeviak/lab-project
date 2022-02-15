@@ -21,7 +21,6 @@ export class GamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.games = this.gamesService.getGames()
-    
     // this.gamesService.getListOfGames()
     // .subscribe(data => console.log(data))
   }
@@ -38,9 +37,13 @@ export class GamesComponent implements OnInit {
     this.filteredGames = this.games.filter(el => el.title.toLocaleLowerCase().includes(query) || el.desc.includes(query));
   }
 
-  onFilter(filter:string){
+  onPriceFilter(filter:string){
     this.priceQuery = filter
     this.filteredGames = this.games.filter(el => Number(el.price) <= Number(filter));
+  }
+
+  onGenresFilter(filter:string[]){
+    this.filteredGames = this.games.filter(el => filter.includes(String(el.genre)))
   }
 
   onInput(query: string){

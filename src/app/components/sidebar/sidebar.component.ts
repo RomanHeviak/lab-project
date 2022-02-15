@@ -13,6 +13,11 @@ export class SidebarComponent implements OnInit {
   minPrice = ''
   priceFilter = ''
 
+  genresFilter:string[] = []
+
+  allGenres = this.gamesService.allGenres
+
+  @Output() genresQuery = new EventEmitter<string[]>()
   @Output() priceQuery = new EventEmitter<string>()
 
   ngOnInit(): void {
@@ -23,6 +28,15 @@ export class SidebarComponent implements OnInit {
   filterPrice(price:string){
     this.priceFilter = price
     this.priceQuery.emit(this.priceFilter)
+  }
+
+  onCheckBox(event:string){
+    if(this.genresFilter.includes(event)){
+      this.genresFilter = this.genresFilter.filter(el => el !== event)
+    }else{
+      this.genresFilter.push(event)
+    }
+    this.genresQuery.emit(this.genresFilter)
   }
 
 }

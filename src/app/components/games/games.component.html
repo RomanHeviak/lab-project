@@ -12,7 +12,7 @@
 
   <div class="main">
     <app-cards [games]="filteredGames.length ? filteredGames : games" (scrollToTop)="onScroll($event)"></app-cards>
-    <app-sidebar (priceQuery)="onFilter($event)"></app-sidebar>
+    <app-sidebar (priceQuery)="onPriceFilter($event)" (genresQuery)="onGenresFilter($event)"></app-sidebar>
   </div>
 
 </div>
