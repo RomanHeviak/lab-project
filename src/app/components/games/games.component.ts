@@ -15,14 +15,25 @@ export class GamesComponent implements OnInit {
   scroll!: ElementRef;
 
   games:IGames[] = []
+  myGamesIds:number[] = []
   searchQuery:string = ''
+  genresQuery:string[] = []
   priceQuery:string = ''
   filteredGames:IGames[] = []
+  minMaxPrice:string[] = []
+  loading = true
 
   ngOnInit(): void {
-    this.games = this.gamesService.getGames()
-    // this.gamesService.getListOfGames()
-    // .subscribe(data => console.log(data))
+    this.gamesService.getMyGamesIds()
+    .subscribe(data => {
+      this.myGamesIds = data
+      this.games = this.gamesService.getGames().filter(el => !this.myGamesIds.includes(el.id))
+      this.filteredGames = this.games
+      this.minMaxPrice.push(this.gamesService.getMinPrice(this.games))
+      this.minMaxPrice.push(this.gamesService.getMaxPrice(this.games))
+      this.loading = false
+    })
+   
   }
 
   onScroll(event:string){
@@ -34,22 +45,38 @@ export class GamesComponent implements OnInit {
 
   searchGame(query: string){
     this.searchQuery = query
-    this.filteredGames = this.games.filter(el => el.title.toLocaleLowerCase().includes(query) || el.desc.includes(query));
+    let res = this.games.filter(el => el.title.toLocaleLowerCase().includes(query) || el.desc.includes(query));
+    this.filteredGames = res.length ? res : []
   }
 
   onPriceFilter(filter:string){
     this.priceQuery = filter
-    this.filteredGames = this.games.filter(el => Number(el.price) <= Number(filter));
+    let res =  this.games.filter(el => Number(el.price) <= Number(filter));
+    if(this.genresQuery.length){
+      res = res.filter(el => this.genresQuery.includes(String(el.genre)))
+    }
+    this.filteredGames = res.length ? res : []
   }
 
   onGenresFilter(filter:string[]){
-    this.filteredGames = this.games.filter(el => filter.includes(String(el.genre)))
+    this.genresQuery = filter
+    let res = this.games.filter(el => filter.includes(String(el.genre)))
+    if(this.priceQuery){
+      res = res.filter(el => Number(el.price) <= Number(this.priceQuery));
+    }
+    this.filteredGames = res.length ? res : this.games
   }
 
   onInput(query: string){
     if(!query.length){
       this.searchQuery = ''
-      this.filteredGames = this.games
+      if(this.genresQuery.length){
+        this.onGenresFilter(this.genresQuery)
+      }
+      if(this.priceQuery){
+        this.onPriceFilter(this.priceQuery)
+      }
+      
     }
   }
   

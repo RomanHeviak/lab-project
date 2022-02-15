@@ -1,13 +1,15 @@
+import { map } from 'rxjs/operators';
 import { IGames } from './../../interfaces/IGames';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private db: AngularFireDatabase) { }
 
   allGames:IGames[] = []
 
@@ -18,6 +20,7 @@ export class GamesService {
     let arr = []
     for(let i = 0; i < 10000; i++){
       let item = {
+        id:i+1,
         title: `Game Title ${i+1}`,
         price: i+50,
         desc: `Lorem ipsum dolor sit amet, 
@@ -38,12 +41,30 @@ export class GamesService {
   //   return this.http.get('https://store.steampowered.com/api/appdetails?appids=10')
   // }
 
-  getMaxPrice(){
-    return String(Math.max(...this.allGames.map(el => el.price)))
+  addToLibrary(game:IGames){
+    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
+    this.db.list(`USERS/${uid}/library`).set(String(game.id),game)
   }
 
-  getMinPrice(){
-    return String(Math.min(...this.allGames.map(el => el.price)))
+  getMyGames(){
+    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
+    return  this.db.list(`USERS/${uid}/library`).valueChanges()
+  }
+
+  getMyGamesIds(){
+    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
+    return  this.db.list(`USERS/${uid}/library`).valueChanges()
+    .pipe(
+      map((data:any) => data.map((el:IGames) => el.id))
+    )
+  }
+
+  getMaxPrice(arr:IGames[]){
+    return String(Math.max(...arr.map(el => el.price)))
+  }
+
+  getMinPrice(arr:IGames[]){
+    return String(Math.min(...arr.map(el => el.price)))
   }
 }
 

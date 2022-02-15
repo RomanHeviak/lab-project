@@ -1,12 +1,13 @@
 <div class="gameCards">
    
      <div *ngFor="let game of pageSlice">
-        <app-card [game]="game" [libraryView]="libraryView"></app-card>
+        <app-card [game]="game" [libraryView]="libraryView" (addedGameId)="addToLibrary($event)"></app-card>
     </div>
     
 </div>
 
 <mat-paginator 
+*ngIf="pageSlice.length"
 [length]="games.length"
 [pageSize]="pageSize"
 [pageSizeOptions]="pageSizeOptions"

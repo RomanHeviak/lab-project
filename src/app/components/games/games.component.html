@@ -10,9 +10,17 @@
     <p class="title cardSectionTitle">Featuring games</p>
   </div>
 
-  <div class="main">
-    <app-cards [games]="filteredGames.length ? filteredGames : games" (scrollToTop)="onScroll($event)"></app-cards>
-    <app-sidebar (priceQuery)="onPriceFilter($event)" (genresQuery)="onGenresFilter($event)"></app-sidebar>
+  <div class="loader" *ngIf="loading">
+    <app-loader ></app-loader>
+  </div>
+
+  <div *ngIf="!filteredGames.length && !loading">
+    <p>No games bt your query ;(</p>
+</div>
+
+  <div  *ngIf="!loading" class="main">
+    <app-cards [games]="filteredGames" (scrollToTop)="onScroll($event)"></app-cards>
+    <app-sidebar (priceQuery)="onPriceFilter($event)" [prices]="minMaxPrice" (genresQuery)="onGenresFilter($event)"></app-sidebar>
   </div>
 
 </div>

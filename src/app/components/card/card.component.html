@@ -17,7 +17,7 @@
     </p>
   </div>
   <div *ngIf="!libraryView" class="cardBtns">
-    <button class="addToLibrary">Add to library</button>
+    <button class="addToLibrary" (click)="addToLibrary(game)">Add to library</button>
   </div>
   <div *ngIf="libraryView" class="cardBtns">
     <button class="downloadBtn addToLibrary">Download</button>

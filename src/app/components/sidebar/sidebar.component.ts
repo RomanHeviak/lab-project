@@ -1,5 +1,6 @@
+import { IGames } from './../../shared/interfaces/IGames';
 import { GamesService } from './../../shared/services/games/games.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +18,13 @@ export class SidebarComponent implements OnInit {
 
   allGenres = this.gamesService.allGenres
 
+  @Input() prices:string[] = []
   @Output() genresQuery = new EventEmitter<string[]>()
   @Output() priceQuery = new EventEmitter<string>()
 
   ngOnInit(): void {
-    this.maxPrice = this.gamesService.getMaxPrice()
-    this.minPrice = this.gamesService.getMinPrice()
+    this.minPrice = this.prices[0]
+    this.maxPrice = this.prices[1]
   }
 
   filterPrice(price:string){
