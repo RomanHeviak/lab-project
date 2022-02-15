@@ -1,4 +1,4 @@
-<div class="window">
+<div class="window" #scroll>
   <div>
     <p class="title">Games</p>
 
@@ -11,7 +11,7 @@
   </div>
 
   <div class="main">
-    <app-cards [games]="games" [searchQuery]="searchQuery" [priceQuery]="priceQuery"></app-cards>
+    <app-cards [games]="filteredGames.length ? filteredGames : games" (scrollToTop)="onScroll($event)"></app-cards>
     <app-sidebar (priceQuery)="onFilter($event)"></app-sidebar>
   </div>
 

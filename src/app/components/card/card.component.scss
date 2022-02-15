@@ -1,5 +1,7 @@
 .cardHead{
     background-color: rgb(189, 188, 255);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     color: white;
     height: 50%;
     display: flex;
@@ -7,6 +9,19 @@
     justify-content: space-between;
     padding: 10px;
     border-radius: 5px 5px 0 0;
+}
+
+.gameCard{
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 300px;
+    width: 270px;
+    margin: 10px;
+
+    transition: .5s all;
+     &:hover{
+        transform: scale(1.1);
+     }
 }
 
 .headText{

@@ -14,7 +14,7 @@ export class LibraryComponent implements OnInit {
   games:IGames[] = []
 
   ngOnInit(): void {
-    this.games = this.gamesService.getGames()
+    // this.games = this.gamesService.getGames()
   }
 
 }

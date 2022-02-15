@@ -20,10 +20,13 @@ export class ProfileComponent implements OnInit {
   loading = true
 
   ngOnInit(): void {
-   let sesionUser = JSON.parse(String(sessionStorage.getItem('currUser'))).user
-
-   this.user.username = sesionUser.displayName
-   this.user.email = sesionUser.email
+    this.fbAuth.authState.subscribe((user) => {
+      if (user) {
+        this.user.email =  String(user.email)
+        this.user.uid = user.uid
+        this.user.username = String(user.displayName ?? '')
+      }
+    });
     
     this.userService.getAge()
     .subscribe(data => {
@@ -42,6 +45,7 @@ export class ProfileComponent implements OnInit {
     };
     if (this.user.username !== username || (age.length && this.user.age !== age)) {
       this.userService.updateUser(data);
+      this.user.username = username
     }
   }
 

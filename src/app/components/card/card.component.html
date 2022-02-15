@@ -1,5 +1,13 @@
+<!-- <div class="cardHead" 
+[ngStyle]="{'background-image':hovered ? 'url(' + game.img + ')' : '' }"
+> -->
+
+
+<div class="gameCard" (mouseenter) ="hover(true)"  (mouseleave) ="hover(false)" >
 <div class="cardHead">
-  <p class="headText">{{ game.title }}</p>
+  <p class="headText">
+    {{ game.title}}
+</p>
   <p *ngIf="!libraryView" class="headText headPrice">{{ game.price }} UAH</p>
 </div>
 <div class="cardInfo">
@@ -15,4 +23,5 @@
     <button class="downloadBtn addToLibrary">Download</button>
     <button class="shareBtn addToLibrary">Share</button>
   </div>
+</div>
 </div>

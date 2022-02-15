@@ -10,12 +10,14 @@ export class SidebarComponent implements OnInit {
 
   constructor(private gamesService: GamesService) { }
   maxPrice = ''
+  minPrice = ''
   priceFilter = ''
 
   @Output() priceQuery = new EventEmitter<string>()
 
   ngOnInit(): void {
     this.maxPrice = this.gamesService.getMaxPrice()
+    this.minPrice = this.gamesService.getMinPrice()
   }
 
   filterPrice(price:string){

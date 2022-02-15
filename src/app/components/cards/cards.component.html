@@ -1,7 +1,15 @@
 <div class="gameCards">
    
-    <div *ngFor="let game of games | gamesSearch: searchQuery | rangeFilter: priceQuery" class="gameCard">
+     <div *ngFor="let game of pageSlice">
         <app-card [game]="game" [libraryView]="libraryView"></app-card>
     </div>
-     
+    
 </div>
+
+<mat-paginator 
+[length]="games.length"
+[pageSize]="pageSize"
+[pageSizeOptions]="pageSizeOptions"
+(page)="onPagination($event)"
+>
+</mat-paginator>

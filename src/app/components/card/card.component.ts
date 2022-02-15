@@ -13,7 +13,12 @@ export class CardComponent implements OnInit {
     price:0,
     desc:''
   }
+  hovered:boolean = false
 
+  hover(value:boolean){
+    this.hovered = value
+  }
+  
   constructor() { }
 
   ngOnInit(): void {

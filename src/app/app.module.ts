@@ -22,8 +22,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { PeoplePipe } from './shared/pipes/people-search.pipe';
 import { LengthPipe } from './shared/pipes/length.pipe';
-import { GamesSearchPipe } from './shared/pipes/games-search.pipe';
-import { RangeFilterPipe } from './shared/pipes/range-filter.pipe';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -40,9 +40,7 @@ import { RangeFilterPipe } from './shared/pipes/range-filter.pipe';
     SidebarComponent,
     LoaderComponent,
     PeoplePipe,
-    LengthPipe,
-    GamesSearchPipe,
-    RangeFilterPipe
+    LengthPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +49,9 @@ import { RangeFilterPipe } from './shared/pipes/range-filter.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    NoopAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
