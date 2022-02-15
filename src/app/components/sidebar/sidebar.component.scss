@@ -1,0 +1,35 @@
+.side{
+    margin-top: 10px;
+    border-left: 1px solid;
+    padding: 0 20px;
+    height: 60vh;
+}
+
+.title{
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+#range{
+    width: 80%;
+}
+
+.filterPrice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.checkBox{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+input[type='checkbox'] {
+    margin-right: 15px;
+    transform: scale(2);
+}
+

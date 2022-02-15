@@ -1,0 +1,47 @@
+nav{
+    box-shadow: 0 10px 5px -5px rgba(0,0,0,0.2);
+    background-color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div{
+        display: flex; 
+        align-items: center;
+    }
+}
+
+.logo{
+    height: 40px;
+    width: 70px;
+}
+
+button{
+    margin-right: 20px;
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(108,105,255);
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgb(53, 51, 177)
+    }
+}
+
+ul{
+    list-style: none;
+    display: flex;
+}
+
+li{
+    margin-left:10px;
+    cursor: pointer;
+}
+
+.active{
+    color: rgb(108,105,255);
+}

@@ -1,0 +1,62 @@
+input, label {
+    display:block;
+}
+
+.title{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 93vh;
+
+    .profile{
+        display: flex;
+        flex-direction: column;
+        width: 270px;
+        box-shadow: 0 5px 15px 0 rgba(0,0,0,0.2);
+        padding: 40px;
+        background-color: white;
+    }
+}
+
+input{
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid gray;
+}
+
+
+
+.profileInfo{
+    height: 300px;
+    justify-content: space-around;
+
+    button{
+        width: 100%;
+    }
+}
+
+.userData{
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    margin-top: 20px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(108,105,255);
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgb(53, 51, 177)
+    }
+}

@@ -1,0 +1,18 @@
+<div class="window">
+  <div>
+    <p class="title">Games</p>
+
+    <label for="searchGame">Search Games</label>
+    <form class="searchBlock">
+      <input #search type="text" id="searchGame" (input)="onInput(search.value)" placeholder="Search Games" />
+      <button (click)="searchGame(search.value)" class="searchBtn">Search</button>
+    </form>
+    <p class="title cardSectionTitle">Featuring games</p>
+  </div>
+
+  <div class="main">
+    <app-cards [games]="games" [searchQuery]="searchQuery" [priceQuery]="priceQuery"></app-cards>
+    <app-sidebar (priceQuery)="onFilter($event)"></app-sidebar>
+  </div>
+
+</div>

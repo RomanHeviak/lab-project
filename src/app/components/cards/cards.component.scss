@@ -1,0 +1,13 @@
+.gameCards{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -50px;
+}
+
+.gameCard{
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 300px;
+    width: 270px;
+    margin: 10px;
+}

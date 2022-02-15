@@ -1,0 +1,7 @@
+<div class="gameCards">
+   
+    <div *ngFor="let game of games | gamesSearch: searchQuery | rangeFilter: priceQuery" class="gameCard">
+        <app-card [game]="game" [libraryView]="libraryView"></app-card>
+    </div>
+     
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "lab-angular-75d9c": {
+      "hosting": {
+        "steam-clone": [
+          "lab-angular-75d9c"
+        ]
+      }
+    }
+  }
+}

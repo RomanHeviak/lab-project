@@ -1,0 +1,34 @@
+<div class="side">
+  <p class="title">Filter by price</p>
+
+  <div class="filterPrice">
+    <input
+      #range
+      type="range"
+      (input)="filterPrice(range.value)"
+      id="range"
+      min="0" max="{{maxPrice}}" value="{{maxPrice}}" step="10"
+    />
+    <label *ngIf="maxPrice === range.value" for="range">Any price</label>
+    <label *ngIf="maxPrice !== range.value" for="range">Max price : {{range.value}}</label>
+  </div>
+
+  <div class="filterTag">
+    <p class="title">Filter by tag</p>
+
+    <div class="checkBox">
+      <input type="checkbox" id="tag1" />
+      <label for="tag1">Tag</label>
+    </div>
+
+    <div class="checkBox">
+      <input type="checkbox" id="tag2" />
+      <label for="tag2">Tag</label>
+    </div>
+
+    <div class="checkBox">
+      <input type="checkbox" id="tag3" />
+      <label for="tag3">Tag</label>
+    </div>
+  </div>
+</div>

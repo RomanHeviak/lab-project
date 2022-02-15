@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/app-test'),
+      dir: require('path').join(__dirname, './coverage/steam-clone'),
       subdir: '.',
       reporters: [
         { type: 'html' },

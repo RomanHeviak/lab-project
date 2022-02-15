@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <form *ngIf="editing" class="profile">
+    <p class="title">Profile</p>
+
+    <label for="username">Username</label>
+    <input
+      #username
+      value="{{ user.username }}"
+      type="text"
+      placeholder="Username"
+      id="username"
+    /><br />
+
+    <label for="password">Email</label>
+    <input
+      #email
+      value="{{ user.email }}"
+      type="email"
+      placeholder="Email"
+      id="email"
+    />
+    <br />
+    <label for="password">Age</label>
+    <input #age value="{{ user.age }}" type="number" placeholder="Age" id="age" />
+
+    <button type="submit" (click)="updateUser(username.value, email.value, age.value)">Save</button>
+  </form>
+
+  <app-loader *ngIf="loading"></app-loader>
+
+  <div *ngIf="!editing && !loading" class="profile profileInfo">
+    <p class="title">Profile</p>
+    <div class="userData">
+      <span>Username: {{ user.username ? user.username : '-' }}</span>
+      <span>Email: {{ user.email ?? "-" }}</span>
+      <span>Age: {{ user.age ? user.age : "-" }}</span>
+    </div>
+    <button (click)="editUser()">Edit</button>
+  </div>
+</div>

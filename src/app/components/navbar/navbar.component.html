@@ -1,0 +1,35 @@
+<nav>
+  <div>
+    <img
+      class="logo"
+      src="https://logos-world.net/wp-content/uploads/2020/10/Steam-Emblem.png"
+    />
+    <ul>
+      <li
+        [routerLink]="['', { outlets: { home: ['games'] } }]"
+        routerLinkActive="active"
+      >
+        Games
+      </li>
+      <li
+        [routerLink]="['', { outlets: { home: ['library'] } }]"
+        routerLinkActive="active"
+      >
+        Library
+      </li>
+      <li
+        [routerLink]="['', { outlets: { home: ['friends'] } }]"
+        routerLinkActive="active"
+      >
+        Friends
+      </li>
+      <li
+        [routerLink]="['', { outlets: { home: ['profile'] } }]"
+        routerLinkActive="active"
+      >
+        Profile
+      </li>
+    </ul>
+  </div>
+  <button (click)="logOut()">Log out</button>
+</nav>

@@ -1,0 +1,36 @@
+<div class="window">
+  <p class="title">Friends</p>
+
+  <form class="search">
+    <div>
+      <label for="sesrchFriend">Search Friends</label>
+      <input #search type="text" (input)="onInput(search.value)" id="sesrchFriend" placeholder="Search Friends" />
+    </div>
+    <button (click)="searchFriend(search.value)" class="searchBtn">Search</button>
+  </form>
+
+  <div class="loader" *ngIf="loading">
+    <app-loader ></app-loader>
+  </div>
+  <div class="myFriends" *ngIf="!loading">
+      <p *ngIf="!searchQuery" class="title">My Friends</p>
+      <p *ngIf="searchQuery" class="title">Search Friends: {{searchQuery}}</p>
+      <p *ngIf="searchQuery" class="">Result: {{people | peopleSearch: searchQuery | length}}</p>
+
+      <ul *ngIf="!searchQuery">
+          <li *ngFor = "let friend of myFriends">
+              <span>{{friend.name}}</span>
+              <button (click)="deleteFriend(friend.id)">Remove Friend</button>
+          </li>
+      </ul>
+
+      <ul *ngIf="searchQuery">
+        <li *ngFor="let per of people | peopleSearch: searchQuery">
+            <span>{{per.name}}</span>
+            <button class="addFriend"  *ngIf="!myFriendIds.includes(per.id)" (click)="addFriend(per)">Add Friend</button>
+            <button *ngIf="myFriendIds.includes(per.id)" (click)="deleteFriend(per.id)">Remove Friend</button>
+        </li>
+        
+    </ul>
+  </div>
+</div>

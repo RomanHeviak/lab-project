@@ -1,0 +1,31 @@
+<div>
+  <form [formGroup]="loginData">
+    <h2>Sign In</h2>
+
+    <h4 *ngIf="valid.errMessage.length">{{ valid.errMessage }}</h4>
+
+    <label for="email">Email</label>
+    <input
+      formControlName="email"
+      required
+      minlength="1"
+      [ngClass]="{ invalidData: valid.errMessage.length }"
+      type="email"
+      placeholder="Email"
+      id="email"
+    /><br />
+
+    <label for="password">Password</label>
+    <input
+      formControlName="password"
+      required
+      minlength="1"
+      [ngClass]="{ invalidData: valid.errMessage.length }"
+      type="password"
+      placeholder="Password"
+      id="password"
+    />
+
+    <button (click)="signIn($event)">Sign In</button>
+  </form>
+</div>
