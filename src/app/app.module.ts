@@ -23,7 +23,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { PeoplePipe } from './shared/pipes/people-search.pipe';
 import { LengthPipe } from './shared/pipes/length.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
