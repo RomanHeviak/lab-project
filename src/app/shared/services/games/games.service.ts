@@ -17,7 +17,7 @@ export class GamesService {
   getGames() {
     this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     let arr = [];
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 10000; i++) {
       let item = {
         id: i + 1,
         title: `Game Title ${i + 1}`,
