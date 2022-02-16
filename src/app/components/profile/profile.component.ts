@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       age: age,
       uid: String(this.user.uid),
     };
-    if (this.user.username !== username || (age.length && this.user.age !== age)) {
+    if (this.user.username !== username || (Number(age) > 0 && this.user.age !== age)) {
       this.userService.updateUser(data);
       this.user.username = username
     }

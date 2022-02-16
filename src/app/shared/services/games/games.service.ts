@@ -12,7 +12,7 @@ export class GamesService {
 
   UID = '';
   allGames: IGames[] = [];
-  allGenres: string[] = [];
+  allGenres: string[] = ['Indie','Action','Adventure'];
 
   getGames() {
     this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
@@ -21,15 +21,16 @@ export class GamesService {
       let item = {
         id: i + 1,
         title: `Game Title ${i + 1}`,
-        price: i + 50,
+        price: Math.floor(Math.random() * 10000),
         desc: `Lorem ipsum dolor sit amet, 
         consectetur adipisicing elit. Exercitationem animi 
         sed aut explicabo quis totam, aliquam eligendi molestiae.`,
-        genre: i % 2 === 0 ? 'action' : 'race',
+        genre: this.allGenres[Math.floor(Math.random() * 3)]
       };
-      if (!this.allGenres.includes(item.genre)) {
-        this.allGenres.push(item.genre);
-      }
+      //case if i have API to collect all available genres
+      // if (!this.allGenres.includes(item.genre)) {
+      //   this.allGenres.push(item.genre);
+      // }
       arr.push(item);
     }
     this.allGames = arr;
