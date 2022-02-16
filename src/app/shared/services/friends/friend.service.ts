@@ -16,38 +16,37 @@ export interface Person {
   image: Object;
   updated: number;
   _links: Object;
+  map(arg0: (el: Person) => { id: number; name: string }): any;
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class FriendService {
+  constructor(private http: HttpClient, private db: AngularFireDatabase) {}
 
-  constructor(private http: HttpClient, private db : AngularFireDatabase) { }
+  UID = '';
 
-  UID = ''
-
-  getListOfPeople():Observable<IPeople[]>{
-    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
-    return this.http.get<Person>('https://api.tvmaze.com/people')
-    .pipe(
-      map((data:any) =>  data.map((el:Person) => ({id:el.id , name:el.name})))
-    )
+  getListOfPeople(): Observable<IPeople[]> {
+    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
+    return this.http
+      .get<Person>('https://api.tvmaze.com/people')
+      .pipe(
+        map((data: Person) =>
+          data.map((el: Person) => ({ id: el.id, name: el.name }))
+        )
+      );
   }
 
-  addFriend(person:IPeople){
-    this.db.list(`USERS/${this.UID}/friends`).set(String(person.id), person)
+  addFriend(person: IPeople) {
+    this.db.list(`USERS/${this.UID}/friends`).set(String(person.id), person);
   }
 
-  getMyFriends():Observable<unknown[]>{
-    return this.db.list<IPeople[]>(`USERS/${this.UID}/friends`)
-    .valueChanges()
-
+  getMyFriends(): Observable<unknown[]> {
+    return this.db.list<IPeople[]>(`USERS/${this.UID}/friends`).valueChanges();
   }
 
-  deleteFriend(id:number){
-    this.db.list(`USERS/${this.UID}/friends`).remove(String(id))
+  deleteFriend(id: number) {
+    this.db.list(`USERS/${this.UID}/friends`).remove(String(id));
   }
 }

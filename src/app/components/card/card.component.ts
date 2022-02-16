@@ -16,15 +16,10 @@ export class CardComponent implements OnInit {
     desc:''
   }
   @Output() addedGameId = new EventEmitter<number>()
-  hovered:boolean = false
   
   constructor(private gameService: GamesService) { }
 
   ngOnInit(): void {
-  }
-
-  hover(value:boolean){
-    this.hovered = value
   }
 
   addToLibrary(game:IGames){

@@ -3,6 +3,7 @@
     border-left: 1px solid;
     padding: 0 20px;
     height: 60vh;
+    background-color: white;
 }
 
 .title{
@@ -29,6 +30,7 @@
 }
 
 input[type='checkbox'] {
+    accent-color: #6C69FF;
     margin-right: 15px;
     transform: scale(2);
 }

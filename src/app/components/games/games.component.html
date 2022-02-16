@@ -14,10 +14,10 @@
     <app-loader ></app-loader>
   </div>
 
-  <div *ngIf="!filteredGames.length && !loading">
+  <div *ngIf="!filteredGames.length && !loading" class="emptyResult">
     <p>No games by your query ;( </p>
     <p>Or games already in your library !</p>
-</div>
+  </div>
 
   <div  *ngIf="!loading" class="main">
     <app-cards [games]="filteredGames" (scrollToTop)="onScroll($event)"></app-cards>
