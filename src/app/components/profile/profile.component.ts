@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   user: IUser = { email: '', uid: '' };
-
   editing = false;
   loading = true
 
@@ -35,11 +34,10 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  updateUser(username: string, email: string, age: string) {
+  updateUser(username: string,age: string) {
     this.editing = false;
     let data = {
       username: username,
-      email: email,
       age: age,
       uid: String(this.user.uid),
     };

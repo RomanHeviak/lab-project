@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  signIn(event: Event) {
-    event.preventDefault();
+  signIn() {
     this.valid.errMessage = '';
     if (this.loginData.valid) {
       this.loginService.logIn(this.loginData);

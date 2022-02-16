@@ -5,6 +5,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+export interface UserEditData {
+  username:string,
+  age:string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,16 +19,17 @@ export class UserService {
     private db: AngularFireDatabase
   ) {}
 
+  UID = ''
+
   getAge(): Observable<unknown> {
-    const uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
+    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     return this.db
-      .list(`USERS/${uid}/age`)
+      .list(`USERS/${this.UID}/age`)
       .valueChanges()
       .pipe(map((data) => data[0]));
   }
 
-  updateUser(data: IUser) {
-    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
+  updateUser(data: UserEditData) {
     this.fbAuth.authState.subscribe((user) => {
       if (user) {
         user.updateProfile({
@@ -31,6 +37,6 @@ export class UserService {
         });
       }
     });
-    this.db.list(`USERS/${uid}/age`).set('age', String(data.age));
+    this.db.list(`USERS/${this.UID}/age`).set('age', String(data.age));
   }
 }

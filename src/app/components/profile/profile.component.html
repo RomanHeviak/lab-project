@@ -24,7 +24,7 @@
     <label for="password">Age</label>
     <input #age value="{{ user.age }}" type="number" placeholder="Age" id="age" />
 
-    <button type="submit" (click)="updateUser(username.value, email.value, age.value)">Save</button>
+    <button type="submit" (click)="updateUser(username.value, age.value)">Save</button>
   </form>
 
   <app-loader *ngIf="loading"></app-loader>

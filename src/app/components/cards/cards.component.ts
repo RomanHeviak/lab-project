@@ -2,7 +2,7 @@ import { GamesService } from './../../shared/services/games/games.service';
 import { IGames } from './../../shared/interfaces/IGames';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import {PageEvent} from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
