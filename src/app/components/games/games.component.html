@@ -15,12 +15,13 @@
   </div>
 
   <div *ngIf="!filteredGames.length && !loading">
-    <p>No games bt your query ;(</p>
+    <p>No games by your query ;( </p>
+    <p>Or games already in your library !</p>
 </div>
 
   <div  *ngIf="!loading" class="main">
     <app-cards [games]="filteredGames" (scrollToTop)="onScroll($event)"></app-cards>
-    <app-sidebar (priceQuery)="onPriceFilter($event)" [prices]="minMaxPrice" (genresQuery)="onGenresFilter($event)"></app-sidebar>
+    <app-sidebar (priceQuery)="onPriceFilter($event)" [minMaxPrice]="minMaxPrice" (genresQuery)="onGenresFilter($event)"></app-sidebar>
   </div>
 
 </div>

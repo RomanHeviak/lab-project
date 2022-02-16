@@ -18,13 +18,13 @@ export class SidebarComponent implements OnInit {
 
   allGenres = this.gamesService.allGenres
 
-  @Input() prices:string[] = []
+  @Input() minMaxPrice:string[] = []
   @Output() genresQuery = new EventEmitter<string[]>()
   @Output() priceQuery = new EventEmitter<string>()
 
   ngOnInit(): void {
-    this.minPrice = this.prices[0]
-    this.maxPrice = this.prices[1]
+    this.minPrice = this.minMaxPrice[0]
+    this.maxPrice = this.minMaxPrice[1]
   }
 
   filterPrice(price:string){

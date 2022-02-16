@@ -33,7 +33,6 @@ export class GamesComponent implements OnInit {
       this.minMaxPrice.push(this.gamesService.getMaxPrice(this.games))
       this.loading = false
     })
-   
   }
 
   onScroll(event:string){
@@ -61,22 +60,24 @@ export class GamesComponent implements OnInit {
   onGenresFilter(filter:string[]){
     this.genresQuery = filter
     let res = this.games.filter(el => filter.includes(String(el.genre)))
+    if(!res.length){
+      res = this.games
+    }
     if(this.priceQuery){
       res = res.filter(el => Number(el.price) <= Number(this.priceQuery));
     }
-    this.filteredGames = res.length ? res : this.games
+    this.filteredGames = res
   }
 
   onInput(query: string){
     if(!query.length){
       this.searchQuery = ''
-      if(this.genresQuery.length){
+      if(this.genresQuery.length || this.priceQuery){
         this.onGenresFilter(this.genresQuery)
-      }
-      if(this.priceQuery){
         this.onPriceFilter(this.priceQuery)
+      }else {
+        this.filteredGames = this.games
       }
-      
     }
   }
   

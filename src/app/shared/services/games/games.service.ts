@@ -12,13 +12,11 @@ export class GamesService {
   constructor(private http: HttpClient, private db: AngularFireDatabase) { }
 
   allGames:IGames[] = []
-
   allGenres:string[] = []
-
 
   getGames(){
     let arr = []
-    for(let i = 0; i < 10000; i++){
+    for(let i = 0; i < 100000; i++){
       let item = {
         id:i+1,
         title: `Game Title ${i+1}`,
