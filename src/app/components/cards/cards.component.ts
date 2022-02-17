@@ -1,4 +1,3 @@
-import { GamesService } from './../../shared/services/games/games.service';
 import { IGames } from './../../shared/interfaces/IGames';
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,12 +10,12 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./cards.component.scss'],
 })
 export class CardsComponent implements OnInit , OnChanges {
-  constructor(private router: Router,private gamesService: GamesService) {}
+  constructor(private router: Router) {}
   @Input() games:IGames[] = []
   @Output() scrollToTop = new EventEmitter<string>();
+
   pageSlice:IGames[] =[]
   endIndex:number = 12
-
   pageSize = 12;
   pageSizeOptions: number[] = [];
 
@@ -24,7 +23,6 @@ export class CardsComponent implements OnInit , OnChanges {
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any){
-    console.log(event)
     if(event.target.innerWidth > 1832){
       this.pageSizeOptions = [4,8,12]
     }else {

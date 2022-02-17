@@ -11,14 +11,17 @@
         {{ game.desc }}
       </p>
     </div>
+
     <div *ngIf="!libraryView" class="cardBtns">
       <button class="addToLibrary" (click)="addToLibrary(game)">
         Add to library
       </button>
     </div>
+
     <div *ngIf="libraryView" class="cardBtns">
       <button class="downloadBtn addToLibrary">Download</button>
       <button class="shareBtn addToLibrary">Share</button>
     </div>
+    
   </div>
 </div>

@@ -44,7 +44,7 @@ export class GamesComponent implements OnInit {
 
   searchGame(query: string){
     this.searchQuery = query
-    let res = this.games.filter(el => el.title.toLocaleLowerCase().includes(query) || el.desc.includes(query));
+    let res = this.games.filter(el => el.title.toLocaleLowerCase().includes(query.toLocaleLowerCase()) || el.desc.includes(query));
     this.filteredGames = res.length ? res : []
   }
 
@@ -60,7 +60,7 @@ export class GamesComponent implements OnInit {
   onGenresFilter(filter:string[]){
     this.genresQuery = filter
     let res = this.games.filter(el => filter.includes(String(el.genre)))
-    if(!res.length){
+    if(!this.genresQuery.length){
       res = this.games
     }
     if(this.priceQuery){

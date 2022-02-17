@@ -11,11 +11,11 @@ export class GamesService {
   constructor(private db: AngularFireDatabase) {}
 
   UID = '';
-  allGames: IGames[] = [];
   allGenres: string[] = ['Indie','Action','Adventure'];
 
   getGames() {
     this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
+    let res = []
     for (let i = 0; i < 10000; i++) {
       let item = {
         id: i + 1,
@@ -26,9 +26,9 @@ export class GamesService {
         sed aut explicabo quis totam, aliquam eligendi molestiae.`,
         genre: this.allGenres[Math.floor(Math.random() * 3)]
       };
-      this.allGames.push(item);
+      res.push(item);
     }
-    return this.allGames;
+    return res;
   }
 
   addToLibrary(game: IGames) {
