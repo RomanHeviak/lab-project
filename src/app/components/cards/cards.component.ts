@@ -1,6 +1,6 @@
 import { GamesService } from './../../shared/services/games/games.service';
 import { IGames } from './../../shared/interfaces/IGames';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -22,15 +22,14 @@ export class CardsComponent implements OnInit , OnChanges {
 
   libraryView = false
 
-  onPagination(event:PageEvent){
-    this.endIndex = event.pageSize
-    let startIndex = event.pageIndex * event.pageSize
-    let endIndex = startIndex + event.pageSize
-    if(endIndex > this.games.length){
-      endIndex = this.games.length
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any){
+    console.log(event)
+    if(event.target.innerWidth > 1832){
+      this.pageSizeOptions = [4,8,12]
+    }else {
+      this.pageSizeOptions = [3,6,9,12];
     }
-    this.pageSlice = this.games.slice(startIndex,endIndex)
-    this.scrollToTop.emit('scroll')
   }
 
   ngOnChanges() {
@@ -41,6 +40,18 @@ export class CardsComponent implements OnInit , OnChanges {
     if(this.router.url === '/homepage(home:library)'){
       this.libraryView = true
     }
+    this.onResize({target:window})
+  }
+
+  onPagination(event:PageEvent){
+    this.endIndex = event.pageSize
+    let startIndex = event.pageIndex * event.pageSize
+    let endIndex = startIndex + event.pageSize
+    if(endIndex > this.games.length){
+      endIndex = this.games.length
+    }
+    this.pageSlice = this.games.slice(startIndex,endIndex)
+    this.scrollToTop.emit('scroll')
   }
 
   addToLibrary(id:number){
