@@ -16,7 +16,6 @@ export class GamesService {
 
   getGames() {
     this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
-    let arr = [];
     for (let i = 0; i < 10000; i++) {
       let item = {
         id: i + 1,
@@ -27,14 +26,9 @@ export class GamesService {
         sed aut explicabo quis totam, aliquam eligendi molestiae.`,
         genre: this.allGenres[Math.floor(Math.random() * 3)]
       };
-      //case if i have API to collect all available genres
-      // if (!this.allGenres.includes(item.genre)) {
-      //   this.allGenres.push(item.genre);
-      // }
-      arr.push(item);
+      this.allGames.push(item);
     }
-    this.allGames = arr;
-    return arr;
+    return this.allGames;
   }
 
   addToLibrary(game: IGames) {

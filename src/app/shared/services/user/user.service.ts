@@ -37,6 +37,6 @@ export class UserService {
         });
       }
     });
-    this.db.list(`USERS/${this.UID}/age`).set('age', String(data.age));
+    this.db.list(`USERS/${this.UID}/age`).set('age', data.age);
   }
 }

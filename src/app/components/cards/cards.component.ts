@@ -18,7 +18,7 @@ export class CardsComponent implements OnInit , OnChanges {
   endIndex:number = 12
 
   pageSize = 12;
-  pageSizeOptions: number[] = [3,6,9,12];
+  pageSizeOptions: number[] = [];
 
   libraryView = false
 
