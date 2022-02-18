@@ -23,11 +23,14 @@ export class GamesComponent implements OnInit {
   minMaxPrice:string[] = []
   loading = true
 
+
   ngOnInit(): void {
+    this.games = this.gamesService.getGames()
+    
     this.gamesService.getMyGamesIds()
     .subscribe(data => {
       this.myGamesIds = data
-      this.games = this.gamesService.getGames().filter(el => !this.myGamesIds.includes(el.id))
+      this.games = this.games.filter(el => !this.myGamesIds.includes(el.id))
       this.filteredGames = this.games
       this.minMaxPrice.push(this.gamesService.getMinPrice(this.games))
       this.minMaxPrice.push(this.gamesService.getMaxPrice(this.games))
