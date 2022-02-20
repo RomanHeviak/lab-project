@@ -20,7 +20,6 @@ export class UserService {
     private db: AngularFireDatabase
   ) {}
 
-  UID = ''
 
   getUID() {
     let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
@@ -33,7 +32,7 @@ export class UserService {
 
   getAge(): Observable<unknown> {
     return this.db
-      .list(`USERS/${this.UID}/age`)
+      .list(`USERS/${this.getUID()}/age`)
       .valueChanges()
       .pipe(map((data) => data[0]));
   }
@@ -46,6 +45,6 @@ export class UserService {
         });
       }
     });
-    this.db.list(`USERS/${this.UID}/age`).set('age', data.age);
+    this.db.list(`USERS/${this.getUID()}/age`).set('age', data.age);
   }
 }
