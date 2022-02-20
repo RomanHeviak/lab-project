@@ -17,8 +17,8 @@ export class LoginService {
   async logIn(loginData:FormGroup){
     try {
       const result = await this.fbAuth.signInWithEmailAndPassword(loginData.value.email, loginData.value.password);
-      this.router.navigateByUrl('/homepage(home:games)');
       sessionStorage.setItem('currUser',JSON.stringify(result))
+      this.router.navigateByUrl('/homepage(home:games)');
     } catch (err:any) {
       this.validationData.errMessage = err.message
       this.router.navigate(['/']);

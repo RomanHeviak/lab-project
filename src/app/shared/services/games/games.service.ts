@@ -1,3 +1,5 @@
+import { UserService } from './../user/user.service';
+import { LoginService } from './../login/login.service';
 import { map } from 'rxjs/operators';
 import { IGames } from './../../interfaces/IGames';
 import { Injectable } from '@angular/core';
@@ -8,13 +10,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GamesService {
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase, private userService: UserService) {}
 
-  UID = '';
+  UID = this.userService.getUID();
   allGenres: string[] = ['Indie','Action','Adventure'];
 
   getGames() {
-    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     let res = []
     for (let i = 0; i < 10000; i++) {
       let item = {
@@ -40,9 +41,8 @@ export class GamesService {
   }
 
   getMyGamesIds(): Observable<number[]> {
-    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     return this.db
-      .list(`USERS/${uid}/library`)
+      .list(`USERS/${this.UID}/library`)
       .valueChanges()
       .pipe(map((data: any) => data.map((el: IGames) => el.id)));
   }

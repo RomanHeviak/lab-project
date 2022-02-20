@@ -24,6 +24,7 @@ import { PeoplePipe } from './shared/pipes/people-search.pipe';
 import { LengthPipe } from './shared/pipes/length.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SidebarComponent,
     LoaderComponent,
     PeoplePipe,
-    LengthPipe
+    LengthPipe,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

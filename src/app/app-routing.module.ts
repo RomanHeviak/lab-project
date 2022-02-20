@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './shared/services/guard/auth.guard';
 import { FriendsComponent } from './components/friends/friends.component';
 import { LibraryComponent } from './components/library/library.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'games', component:GamesComponent , outlet:"home"},
   {path:'library', component:LibraryComponent , outlet:"home"},
   {path:'friends', component:FriendsComponent , outlet:"home"},
-  {path:'profile', component:ProfileComponent , outlet:"home"}
+  {path:'profile', component:ProfileComponent , outlet:"home"},
+  {path:'**', component:NotFoundComponent}
 ];
 
 @NgModule({

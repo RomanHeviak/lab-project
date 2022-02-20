@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { IPeople } from './../../interfaces/IPeople';
 import { HttpClient } from '@angular/common/http';
@@ -23,12 +24,11 @@ export interface Person {
   providedIn: 'root',
 })
 export class FriendService {
-  constructor(private http: HttpClient, private db: AngularFireDatabase) {}
+  constructor(private http: HttpClient, private db: AngularFireDatabase, private userService: UserService) {}
 
-  UID = '';
+  UID = this.userService.getUID();
 
   getListOfPeople(): Observable<IPeople[]> {
-    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     return this.http
       .get<Person>('https://api.tvmaze.com/people')
       .pipe(

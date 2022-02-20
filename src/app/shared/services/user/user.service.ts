@@ -1,5 +1,6 @@
+import { LoginService } from './../login/login.service';
 import { IUser } from './../../interfaces/IUser';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
@@ -21,8 +22,16 @@ export class UserService {
 
   UID = ''
 
+  getUID() {
+    let uid = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid
+    if(uid){
+      return uid
+    }else {
+      return ''
+    }
+  }
+
   getAge(): Observable<unknown> {
-    this.UID = JSON.parse(String(sessionStorage.getItem('currUser'))).user.uid;
     return this.db
       .list(`USERS/${this.UID}/age`)
       .valueChanges()
