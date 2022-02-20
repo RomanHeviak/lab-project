@@ -1,4 +1,3 @@
-import { IGames } from './../../shared/interfaces/IGames';
 import { GamesService } from './../../shared/services/games/games.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
