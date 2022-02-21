@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FirebaseService } from 'src/app/firebase/firebase.service';
 
 export interface UserEditData {
   username:string,
@@ -15,7 +16,8 @@ export interface UserEditData {
 export class UserService {
   constructor(
     private fbAuth: AngularFireAuth,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    private fbService: FirebaseService
   ) {}
 
 
@@ -29,10 +31,8 @@ export class UserService {
   }
 
   getAge(): Observable<unknown> {
-    return this.db
-      .list(`USERS/${this.getUID()}/age`)
-      .valueChanges()
-      .pipe(map((data) => data[0]));
+    return this.fbService.getDataFromDB(this.getUID(),'age')
+    .pipe(map((data) => data[0]));
   }
 
   updateUser(data: UserEditData) {

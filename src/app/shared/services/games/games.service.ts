@@ -1,3 +1,4 @@
+import { FirebaseService } from './../../../firebase/firebase.service';
 import { UserService } from './../user/user.service';
 import { map } from 'rxjs/operators';
 import { IGames } from './../../interfaces/IGames';
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GamesService {
-  constructor(private db: AngularFireDatabase, private userService: UserService) {}
+  constructor(private db: AngularFireDatabase, private userService: UserService,private fbService: FirebaseService) {}
 
   UID = this.userService.getUID();
   allGenres: string[] = ['Indie','Action','Adventure'];
@@ -32,18 +33,22 @@ export class GamesService {
   }
 
   addToLibrary(game: IGames) {
-    this.db.list(`USERS/${this.UID}/library`).set(String(game.id), game);
+    // this.db.list(`USERS/${this.UID}/library`).set(String(game.id), game);
+    this.fbService.addTo(this.UID,game,'library')
   }
 
   getMyGames(): Observable<unknown[]> {
-    return this.db.list(`USERS/${this.UID}/library`).valueChanges();
+    // return this.db.list(`USERS/${this.UID}/library`).valueChanges();
+    return this.fbService.getDataFromDB(this.UID,'library')
   }
 
   getMyGamesIds(): Observable<number[]> {
-    return this.db
-      .list(`USERS/${this.UID}/library`)
-      .valueChanges()
-      .pipe(map((data: any) => data.map((el: IGames) => el.id)));
+    // return this.db
+    //   .list(`USERS/${this.UID}/library`)
+    //   .valueChanges()
+    //   .pipe(map((data: any) => data.map((el: IGames) => el.id)));
+    return this.fbService.getDataFromDB(this.UID,'library')
+    .pipe(map((data: any) => data.map((el: IGames) => el.id)));
   }
 
   getMaxPrice(arr: IGames[]) {

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FirebaseService } from 'src/app/firebase/firebase.service';
 
 export interface Person {
   id: number;
@@ -24,7 +25,12 @@ export interface Person {
   providedIn: 'root',
 })
 export class FriendService {
-  constructor(private http: HttpClient, private db: AngularFireDatabase, private userService: UserService) {}
+  constructor(
+    private http: HttpClient,
+    private db: AngularFireDatabase,
+    private userService: UserService,
+    private fbService: FirebaseService
+  ) {}
 
   UID = this.userService.getUID();
 
@@ -39,11 +45,11 @@ export class FriendService {
   }
 
   addFriend(person: IPeople) {
-    this.db.list(`USERS/${this.UID}/friends`).set(String(person.id), person);
+    this.fbService.addTo(this.UID, person, 'friends');
   }
 
   getMyFriends(): Observable<unknown[]> {
-    return this.db.list<IPeople[]>(`USERS/${this.UID}/friends`).valueChanges();
+    return this.fbService.getDataFromDB(this.UID, 'friends');
   }
 
   deleteFriend(id: number) {
