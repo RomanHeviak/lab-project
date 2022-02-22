@@ -4,7 +4,7 @@
         <app-card [game]="game" [libraryView]="libraryView" (addedGameId)="addToLibrary($event)"></app-card>
     </div>
 
-    <div *ngIf="!games.length">
+    <div *ngIf="!games.length && !libraryView">
         <p>No games by your query ;( </p>
         <p>Or games already in your library !</p>
     </div>
