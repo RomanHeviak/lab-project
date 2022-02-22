@@ -21,7 +21,7 @@ export class GamesService {
       let item = {
         id: i + 1,
         title: `Game Title ${i + 1}`,
-        price: Math.floor(Math.random() * 10000),
+        price: Math.floor(Math.random() * 10000)+ 1,
         desc: `Lorem ipsum dolor sit amet, 
         consectetur adipisicing elit. Exercitationem animi 
         sed aut explicabo quis totam, aliquam eligendi molestiae.`,
@@ -33,29 +33,23 @@ export class GamesService {
   }
 
   addToLibrary(game: IGames) {
-    // this.db.list(`USERS/${this.UID}/library`).set(String(game.id), game);
     this.fbService.addTo(this.UID,game,'library')
   }
 
   getMyGames(): Observable<unknown[]> {
-    // return this.db.list(`USERS/${this.UID}/library`).valueChanges();
     return this.fbService.getDataFromDB(this.UID,'library')
   }
 
   getMyGamesIds(): Observable<number[]> {
-    // return this.db
-    //   .list(`USERS/${this.UID}/library`)
-    //   .valueChanges()
-    //   .pipe(map((data: any) => data.map((el: IGames) => el.id)));
     return this.fbService.getDataFromDB(this.UID,'library')
     .pipe(map((data: any) => data.map((el: IGames) => el.id)));
   }
 
   getMaxPrice(arr: IGames[]) {
-    return String(Math.max(...arr.map((el) => el.price)));
+    return Math.max(...arr.map((el) => el.price));
   }
 
   getMinPrice(arr: IGames[]) {
-    return String(Math.min(...arr.map((el) => el.price)));
+    return Math.min(...arr.map((el) => el.price));
   }
 }

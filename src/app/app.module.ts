@@ -20,11 +20,14 @@ import { CardComponent } from './components/card/card.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoaderComponent } from './components/loader/loader.component';
-import { PeoplePipe } from './shared/pipes/people-search.pipe';
-import { LengthPipe } from './shared/pipes/length.pipe';
+import { PeoplePipe } from './shared/pipes/people-search/people-search.pipe';
+import { LengthPipe } from './shared/pipes/length/length.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PriceFilterPipe } from './shared/pipes/price-filter/price-filter.pipe';
+import { GenresFilterPipe } from './shared/pipes/genres-filter/genres-filter.pipe';
+import { GameSearchPipe } from './shared/pipes/game-search/game-search.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     LoaderComponent,
     PeoplePipe,
     LengthPipe,
-    NotFoundComponent
+    NotFoundComponent,
+    PriceFilterPipe,
+    GenresFilterPipe,
+    GameSearchPipe
   ],
   imports: [
     BrowserModule,

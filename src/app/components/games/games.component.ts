@@ -17,10 +17,8 @@ export class GamesComponent implements OnInit {
   games:IGames[] = []
   myGamesIds:number[] = []
   searchQuery:string = ''
-  genresQuery:string[] = []
+  genresQuery:string = ''
   priceQuery:string = ''
-  filteredGames:IGames[] = []
-  minMaxPrice:string[] = []
   loading = true
 
 
@@ -31,9 +29,6 @@ export class GamesComponent implements OnInit {
     .subscribe(data => {
       this.myGamesIds = data
       this.games = this.games.filter(el => !this.myGamesIds.includes(el.id))
-      this.filteredGames = this.games
-      this.minMaxPrice.push(this.gamesService.getMinPrice(this.games))
-      this.minMaxPrice.push(this.gamesService.getMaxPrice(this.games))
       this.loading = false
     })
   }
@@ -47,40 +42,19 @@ export class GamesComponent implements OnInit {
 
   searchGame(query: string){
     this.searchQuery = query
-    let res = this.games.filter(el => el.title.toLocaleLowerCase().includes(query.toLocaleLowerCase()) || el.desc.includes(query));
-    this.filteredGames = res.length ? res : []
   }
 
   onPriceFilter(filter:string){
     this.priceQuery = filter
-    let res =  this.games.filter(el => Number(el.price) <= Number(filter));
-    if(this.genresQuery.length){
-      res = res.filter(el => this.genresQuery.includes(String(el.genre)))
-    }
-    this.filteredGames = res.length ? res : []
   }
 
   onGenresFilter(filter:string[]){
-    this.genresQuery = filter
-    let res = this.games.filter(el => filter.includes(String(el.genre)))
-    if(!this.genresQuery.length){
-      res = this.games
-    }
-    if(this.priceQuery){
-      res = res.filter(el => Number(el.price) <= Number(this.priceQuery));
-    }
-    this.filteredGames = res
+    this.genresQuery = filter.join(' ')
   }
 
   onInput(query: string){
     if(!query.length){
       this.searchQuery = ''
-      if(this.genresQuery.length || this.priceQuery){
-        this.onGenresFilter(this.genresQuery)
-        this.onPriceFilter(this.priceQuery)
-      }else {
-        this.filteredGames = this.games
-      }
     }
   }
   

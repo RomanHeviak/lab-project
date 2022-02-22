@@ -1,4 +1,4 @@
-import { IPeople } from './../interfaces/IPeople';
+import { IPeople } from '../../interfaces/IPeople';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

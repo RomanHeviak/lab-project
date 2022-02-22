@@ -9,8 +9,8 @@
       id="range"
       min="{{minPrice}}" max="{{maxPrice}}" value="{{maxPrice}}" step="1"
     />
-    <label *ngIf="maxPrice === range.value" for="range">Any price</label>
-    <label *ngIf="maxPrice !== range.value" for="range">Max price : {{range.value}}</label>
+    <label *ngIf="maxPrice === +range.value" for="range">Any price</label>
+    <label *ngIf="maxPrice !== +range.value" for="range">Max price : {{range.value}}</label>
   </div>
 
   <div class="filterTag">

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IPeople } from '../interfaces/IPeople';
+import { IPeople } from '../../interfaces/IPeople';
 
 @Pipe({
   name: 'peopleSearch'

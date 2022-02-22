@@ -3,6 +3,11 @@
      <div *ngFor="let game of pageSlice">
         <app-card [game]="game" [libraryView]="libraryView" (addedGameId)="addToLibrary($event)"></app-card>
     </div>
+
+    <div *ngIf="!games.length">
+        <p>No games by your query ;( </p>
+        <p>Or games already in your library !</p>
+    </div>
     
 </div>
 
